@@ -86,6 +86,18 @@ open class SteppedProgressBar: UIView {
     }
   }
 
+  open var stepFont: UIFont = UIFont.systemFont(ofSize: 14.0) {
+    didSet {
+      self.setNeedsDisplay()
+    }
+  }
+
+  open var titleFont: UIFont = UIFont.systemFont(ofSize: 12.0) {
+    didSet {
+      self.setNeedsDisplay()
+    }
+  }
+
   open var insets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) {
     didSet {
       self.setNeedsDisplay()
@@ -286,11 +298,10 @@ open class SteppedProgressBar: UIView {
       //draw index
       if stepDrawingMode == .drawIndex  {
         let buttonTitle = "\(index + 1)"
-        let font = UIFont.boldSystemFont(ofSize: 14.0)
         #if swift(>=4.0)
-        attributes[NSAttributedString.Key.font] = font
+        attributes[NSAttributedString.Key.font] = self.stepFont
         #else
-        attributes[NSFontAttributeName] = font
+        attributes[NSFontAttributeName] = self.stepFont
         #endif
         let attributedString = NSAttributedString(string: buttonTitle, attributes: attributes)
         attributedString.draw(center: point)
@@ -303,9 +314,9 @@ open class SteppedProgressBar: UIView {
     titleCenter.y += circleRadius * 0.75 + titleOffset
     let title = titles[index]
     #if swift(>=4.0)
-    attributes[NSAttributedString.Key.font] = UIFont.boldSystemFont(ofSize: 12.0)
+    attributes[NSAttributedString.Key.font] = self.titleFont
     #else
-    attributes[NSFontAttributeName] = UIFont.boldSystemFont(ofSize: 12.0)
+    attributes[NSFontAttributeName] = self.titleFont
     #endif
     let attributedString = NSAttributedString(string: title, attributes: attributes)
     attributedString.draw(center: titleCenter)
