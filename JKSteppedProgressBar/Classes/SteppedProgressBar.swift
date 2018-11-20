@@ -80,19 +80,19 @@ open class SteppedProgressBar: UIView {
   @IBInspectable open  var tintActiveImage = false
   @IBInspectable open var justCheckCompleted = true
 
+  @IBInspectable open var stepFont: UIFont = UIFont.systemFont(ofSize: 14.0) {
+    didSet {
+      self.setNeedsDisplay()
+    }
+  }
+
+  @IBInspectable open var titleFont: UIFont = UIFont.systemFont(ofSize: 12.0) {
+    didSet {
+      self.setNeedsDisplay()
+    }
+  }
+
   open var stepDrawingMode: StepDrawingMode = .drawIndex {
-    didSet {
-      self.setNeedsDisplay()
-    }
-  }
-
-  open var stepFont: UIFont = UIFont.systemFont(ofSize: 14.0) {
-    didSet {
-      self.setNeedsDisplay()
-    }
-  }
-
-  open var titleFont: UIFont = UIFont.systemFont(ofSize: 12.0) {
     didSet {
       self.setNeedsDisplay()
     }
