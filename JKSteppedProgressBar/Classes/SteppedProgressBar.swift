@@ -104,6 +104,12 @@ open class SteppedProgressBar: UIView {
     }
   }
 
+  open var stepTitles: [String]? = ["1", "2", "3", "4", "5", "✓"] {
+    didSet {
+      self.setNeedsDisplay()
+    }
+  }
+
   open var titles = ["One", "Two","Three", "Four","Five", "Six"] {
     didSet {
       self.setNeedsDisplay()
@@ -297,7 +303,7 @@ open class SteppedProgressBar: UIView {
     if index >= currentTab - (justCheckCompleted ? 1 : 0) || ( activeImages ?? [] ).count <= index {
       //draw index
       if stepDrawingMode == .drawIndex  {
-        let buttonTitle = "\(index + 1)"
+        let buttonTitle = stepTitles[safe: index] ?? "\(index + 1)"
         #if swift(>=4.0)
         attributes[NSAttributedString.Key.font] = self.stepFont
         #else
@@ -324,6 +330,12 @@ open class SteppedProgressBar: UIView {
     point.x += languageFactor * circleRadius / 2.0
     path.move(to: point)
 
+  }
+}
+
+private extension Array {
+  subscript(safe index: Int) -> Element? {
+    return indices ~= index ? self[index] : nil
   }
 }
 
