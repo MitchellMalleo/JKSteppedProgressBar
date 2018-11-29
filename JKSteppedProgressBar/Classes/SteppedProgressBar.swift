@@ -104,7 +104,7 @@ open class SteppedProgressBar: UIView {
     }
   }
 
-  open var stepTitles: [String]? = ["1", "2", "3", "4", "5", "✓"] {
+  open var stepTitles: [String] = ["1", "2", "3", "4", "5", "✓"] {
     didSet {
       self.setNeedsDisplay()
     }
